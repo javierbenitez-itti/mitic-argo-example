@@ -1,0 +1,6 @@
+apiVersion: v2
+name: mi-app
+description: Helm chart base para mi-app (Spring Boot)
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

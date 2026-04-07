@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mi-app-staging
+  namespace: argocd
+  labels:
+    environment: staging
+    team: backend
+spec:
+  project: default
+
+  # ── Fuente: este mismo repo ──────────────────────────────────
+  source:
+    repoURL: git@gitlab.com:tu-grupo/argo-central.git   # ← ajustar
+    targetRevision: main
+    path: apps/mi-app/staging
+
+    # Helm chart local con values específicos de staging
+    helm:
+      valueFiles:
+        - values-staging.yaml
+
+  # ── Destino: cluster de staging ──────────────────────────────
+  destination:
+    server: https://kubernetes.default.svc   # cluster donde corre ArgoCD
+    namespace: staging
+
+  # ── Sync automático: clave del flujo GitOps ─────────────────
+  syncPolicy:
+    automated:
+      prune: true       # elimina recursos no declarados en git
+      selfHeal: true    # restaura si alguien edita manualmente el cluster
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - RespectIgnoreDifferences=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m
+
+  # ── Ignorar diferencias en campos auto-gestionados ───────────
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas   # si usás HPA, ArgoCD no pisará las réplicas
