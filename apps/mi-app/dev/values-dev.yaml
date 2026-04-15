@@ -2,7 +2,7 @@
 # Jenkins actualiza el campo `tag` en cada build exitoso de develop.
 
 image:
-  repository: harbor.homelab.arpa:80/library/mi-java-app
+  repository: harbor.homelab.arpa/library/mi-java-app
   tag: "latest"
   pullPolicy: Always
 
