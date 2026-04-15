@@ -13,12 +13,12 @@ spec:
   source:
     repoURL: git@github.com:javierbenitez-itti/mitic-argo-example.git
     targetRevision: main
-    path: apps/mi-app/staging
+    path: apps/mi-app/base
 
     # Helm chart local con values específicos de staging
     helm:
       valueFiles:
-        - values-staging.yaml
+        - ../staging/values-staging.yaml
 
   # ── Destino: cluster de staging ──────────────────────────────
   destination:

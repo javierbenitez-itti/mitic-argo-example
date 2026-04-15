@@ -12,11 +12,11 @@ spec:
   source:
     repoURL: git@github.com:javierbenitez-itti/mitic-argo-example.git
     targetRevision: main
-    path: apps/mi-app/dev
+    path: apps/mi-app/base
 
     helm:
       valueFiles:
-        - values-dev.yaml
+        - ../dev/values-dev.yaml
 
   destination:
     server: https://kubernetes.default.svc
