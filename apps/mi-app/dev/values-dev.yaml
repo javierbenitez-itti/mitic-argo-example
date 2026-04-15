@@ -1,10 +1,9 @@
-# values-staging.yaml
+# values-dev.yaml
 # Jenkins actualiza el campo `tag` en cada build exitoso de develop.
-# ArgoCD detecta el commit y sincroniza automáticamente.
 
 image:
   repository: harbor.homelab.arpa:80/library/mi-java-app
-  tag: "latest"          # Jenkins reemplaza este valor con BUILD_NUMBER-SHA
+  tag: "latest"
   pullPolicy: Always
 
 replicaCount: 1
@@ -16,32 +15,30 @@ service:
 ingress:
   enabled: true
   className: nginx
-  host: mi-app-staging.tu-dominio.com               # ← ajustar
-  tls: false   # habilitar en staging si hay cert-manager
+  host: mi-app-dev.tu-dominio.com
+  tls: false
 
 resources:
   requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
     cpu: 250m
     memory: 512Mi
-  limits:
-    cpu: 500m
-    memory: 1Gi
 
 env:
-  SPRING_PROFILES_ACTIVE: staging
-  JAVA_OPTS: "-Xms256m -Xmx768m"
+  SPRING_PROFILES_ACTIVE: dev
+  JAVA_OPTS: "-Xms128m -Xmx384m"
 
-# Configuración extra por ambiente
 configMap:
   enabled: true
   data:
-    APP_ENV: staging
+    APP_ENV: dev
     LOG_LEVEL: DEBUG
 
-# Secretos (referenciados desde Kubernetes Secrets, no valores en texto)
 secrets:
   enabled: true
-  name: mi-app-staging-secrets   # Secret creado aparte en el cluster
+  name: mi-app-dev-secrets
 
 livenessProbe:
   path: /actuator/health/liveness

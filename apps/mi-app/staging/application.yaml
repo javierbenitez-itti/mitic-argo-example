@@ -11,7 +11,7 @@ spec:
 
   # ── Fuente: este mismo repo ──────────────────────────────────
   source:
-    repoURL: git@gitlab.com:tu-grupo/argo-central.git   # ← ajustar
+    repoURL: git@github.com:javierbenitez-itti/mitic-argo-example.git
     targetRevision: main
     path: apps/mi-app/staging
 
