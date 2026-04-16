@@ -37,7 +37,7 @@ configMap:
     LOG_LEVEL: DEBUG
 
 secrets:
-  enabled: true
+  enabled: false
   name: mi-app-dev-secrets
 
 livenessProbe:
