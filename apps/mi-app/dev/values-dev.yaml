@@ -41,11 +41,13 @@ secrets:
   name: mi-app-dev-secrets
 
 livenessProbe:
+  enabled: false
   path: /actuator/health/liveness
   initialDelaySeconds: 30
   periodSeconds: 15
 
 readinessProbe:
+  enabled: false
   path: /actuator/health/readiness
   initialDelaySeconds: 20
   periodSeconds: 10
