@@ -1,11 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mi-app-dev
+  name: mitic-app-front-dev
   namespace: argocd
   labels:
     environment: dev
-    team: backend
+    team: frontend
 spec:
   project: default
 
