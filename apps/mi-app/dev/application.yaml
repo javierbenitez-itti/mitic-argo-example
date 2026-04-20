@@ -20,7 +20,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: dev
+    namespace: mi-app-dev
 
   syncPolicy:
     automated:

@@ -23,7 +23,7 @@ spec:
   # ── Destino: cluster de staging ──────────────────────────────
   destination:
     server: https://kubernetes.default.svc   # cluster donde corre ArgoCD
-    namespace: staging
+    namespace: mi-app-staging
 
   # ── Sync automático: clave del flujo GitOps ─────────────────
   syncPolicy:

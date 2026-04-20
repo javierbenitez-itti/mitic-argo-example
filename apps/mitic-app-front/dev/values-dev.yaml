@@ -1,0 +1,47 @@
+image:
+  repository: harbor.homelab.arpa/library/mitic-app-front
+  tag: "1.0.0-SNAPSHOT"
+  pullPolicy: Always
+
+replicaCount: 1
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: nginx
+  host: mitic-app-front-dev.tu-dominio.com
+  tls: false
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 64Mi
+  limits:
+    cpu: 50m
+    memory: 128Mi
+
+env:
+  APP_ENV: dev
+
+configMap:
+  enabled: false
+  data: {}
+
+secrets:
+  enabled: false
+  name: mi-app-dev-secrets
+
+livenessProbe:
+  enabled: false
+  path: /
+  initialDelaySeconds: 15
+  periodSeconds: 15
+
+readinessProbe:
+  enabled: false
+  path: /
+  initialDelaySeconds: 10
+  periodSeconds: 10
