@@ -3,7 +3,7 @@
 
 image:
   repository: harbor.homelab.arpa/library/mi-java-app
-  tag: "1.0.0-SNAPSHOT-8-7869c91"
+  tag: "1.0.0-SNAPSHOT-9-7869c91"
   pullPolicy: Always
 
 replicaCount: 1
