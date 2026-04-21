@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mitic-app-front-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    # 1. Molde (Chart) desde Harbor en formato OCI
+    - repoURL: harbor.homelab.arpa/library
+      chart: mitic-app-front
+      targetRevision: 1.0.0
+      helm:
+        valueFiles:
+          - $valores-git/envs/dev/values-front.yaml
+    
+    # 2. Configuración (Values) desde este repositorio Git
+    - repoURL: git@github.com:javierbenitez-itti/mitic-argo-example.git
+      targetRevision: main
+      ref: valores-git
+      
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mitic-app-front-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
