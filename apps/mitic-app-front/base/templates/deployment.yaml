@@ -55,3 +55,15 @@ spec:
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
           {{- end }}
+          {{- if .Values.runtimeConfig.enabled }}
+          volumeMounts:
+            - name: runtime-config
+              mountPath: {{ .Values.runtimeConfig.mountPath }}
+              subPath: {{ .Values.runtimeConfig.fileName }}
+          {{- end }}
+      {{- if .Values.runtimeConfig.enabled }}
+      volumes:
+        - name: runtime-config
+          configMap:
+            name: {{ .Release.Name }}-runtime-config
+      {{- end }}

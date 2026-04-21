@@ -1,0 +1,13 @@
+{{- if .Values.runtimeConfig.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-runtime-config
+  labels:
+    app: {{ .Release.Name }}
+data:
+  {{ .Values.runtimeConfig.fileName }}: |
+    window.__RUNTIME_CONFIG__ = {
+      API_BASE_URL: "{{ .Values.runtimeConfig.apiBaseUrl }}"
+    }
+{{- end }}

@@ -45,3 +45,15 @@ readinessProbe:
   path: /
   initialDelaySeconds: 10
   periodSeconds: 10
+
+# Configuración runtime inyectada vía ConfigMap de Kubernetes.
+# Permite cambiar la URL del backend sin reconstruir la imagen Docker.
+runtimeConfig:
+  enabled: false
+  # Nombre del archivo JS que será sobreescrito en el contenedor
+  fileName: "config.js"
+  # Ruta exacta dentro del contenedor Nginx donde se monta el archivo
+  mountPath: "/usr/share/nginx/html/config.js"
+  # URL del backend: en K8s mismo namespace usar nombre del Service
+  apiBaseUrl: "http://mitic-app-back-dev:8080"
+
