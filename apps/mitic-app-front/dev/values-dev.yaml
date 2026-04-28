@@ -1,6 +1,6 @@
 image:
   repository: harbor.homelab.arpa/library/mitic-app-front
-  tag: "1.0.0-SNAPSHOT-11-0d27157"
+  tag: "1.0.0-SNAPSHOT-12-76b9d35"
   pullPolicy: Always
 
 replicaCount: 1
